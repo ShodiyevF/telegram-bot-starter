@@ -1,0 +1,8 @@
+# FOLDERS
+/node_modules
+/dist
+/drizzle
+
+# FILES
+.env
+package-lock.json

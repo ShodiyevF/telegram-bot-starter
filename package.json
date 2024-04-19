@@ -1,0 +1,39 @@
+{
+  "name": "grammyjs",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/server.ts",
+  "scripts": {
+    "start": "pm2 start dist/server.js --name 'projectName'",
+    "restart": "pm2 restart 'projectName'",
+    "delete": "pm2 delete 'projectName'",
+
+    "start:dev": "nodemon",
+
+    "build": "tsc --project tsconfig.json && tscpaths -p tsconfig.json -s ./src -o ./dist",
+
+    "migration:generate": "rizzle-kit generate:pg --schema=./src/database/schema.ts",
+    "migration:push": "node -r esbuild-register src/database/pg.ts",
+    "migration": "drizzle-kit generate:pg --schema=./src/database/schema.ts && node -r esbuild-register src/database/migration.ts"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "drizzle-orm": "^0.30.8",
+    "grammy": "^1.22.4",
+    "grammy-scenes": "^10.2.0",
+    "pg": "^8.11.5",
+    "tscpaths": "^0.0.9"
+  },
+  "devDependencies": {
+    "@types/node": "^20.12.7",
+    "@types/pg": "^8.11.5",
+    "drizzle-kit": "^0.20.14",
+    "ts-node": "^10.9.2",
+    "tsconfig-paths": "^4.2.0",
+    "tslib": "^2.6.2",
+    "typescript": "^5.4.5"
+  }
+}
