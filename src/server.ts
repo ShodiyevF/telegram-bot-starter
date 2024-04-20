@@ -1,9 +1,10 @@
-import { ScenesSessionData, ScenesFlavor } from 'grammy-scenes';
-import { Bot, Context, SessionFlavor, session } from 'grammy';
+import { Bot, session } from 'grammy';
 import dotenv from 'dotenv';
 
-import scenes from '@scene/scenes';
 import { starterScene } from '@scene/starter.scene';
+import { syncUsers } from '@config/user.controller';
+import BotContext from '@customTypes/botcontext';
+import scenes from '@scene/scenes';
 
 dotenv.config();
 
@@ -11,7 +12,6 @@ function initializer() {
     
     const botToken = process.env.BOT_TOKEN ? process.env.BOT_TOKEN : 'not_found'
     
-    type BotContext = Context & SessionFlavor<ScenesSessionData> & ScenesFlavor;
     const bot = new Bot<BotContext>(botToken);
 
     function initializeMiddlewares():void {
@@ -23,6 +23,10 @@ function initializer() {
         
         bot.use(scenes.manager());
         bot.use(scenes);
+    }
+
+    function libs():void {
+        syncUsers(bot)
     }
     
     function initializeScenes():void {
@@ -37,6 +41,7 @@ function initializer() {
     function runner():void {
         initializeMiddlewares();
         initializeScenes();
+        libs();
         startBot();
     }
 
