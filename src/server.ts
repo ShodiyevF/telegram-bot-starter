@@ -1,4 +1,4 @@
-import { Bot, session } from 'grammy';
+import { Api, Bot, session } from 'grammy';
 import dotenv from 'dotenv';
 
 import { starterScene } from '@scene/starter.scene';
@@ -13,6 +13,7 @@ function initializer() {
     const botToken = process.env.BOT_TOKEN ? process.env.BOT_TOKEN : 'not_found'
     
     const bot = new Bot<BotContext>(botToken);
+    const api = new Api(botToken);
 
     function initializeMiddlewares():void {
         bot.use(
@@ -26,7 +27,7 @@ function initializer() {
     }
 
     function libs():void {
-        syncUsers(bot)
+        syncUsers(bot, api)
     }
     
     function initializeScenes():void {
