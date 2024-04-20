@@ -33,7 +33,8 @@
       "@database/*": ["src/database/*"],
       "@scene/*": ["src/scene/*"],
       "@module/*": ["src/module/*"],
-      "@customTypes/*": ["src/types/*"]
+      "@customTypes/*": ["src/types/*"],
+      "@lib/*": ["src/lib/*"]
     }
   },
   "include": ["src/**/*"],
